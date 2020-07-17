@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+</style>
+</head>
+<body>
+
+
+<div class="topnav">
+  <a href="#home">Home</a>
+  <a class="active" href="#news">News</a>
+  <a href="#contact">Contact</a>
+  <a href="#about">About</a>
+</div>
+
+<div style="padding-left:20px">
+  <h2>Unemployment rate of men and women in the United States, since 1990</h2>
+  <p style="font-family:verdana">The chart below provides a glimpse of how has the unemployment rate changed for men and women combined and individually from 2010 to 2020, highligting
+     the year 1992 which saw the highest unemployment rate. </p> <br></br>
+</div>
+
+
+<div class="pagination">
+  <a href="">&laquo;</a>
+  <a href="https://arushig6.github.io/test1/">1</a>
+  <a href="https://gargarushi.github.io/WebPage2/">2</a>
+  <a href="https://arushig6.github.io/test1/" class="active">3</a>
+  <a href="#">&raquo;</a>
+</div>
+
+</body>
+</html>
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<label style = "padding-left:200px"></label>
+<label for="selectButton">Select option:</label>
+<!-- Initialize a select button -->
+<select id="selectButton"  style="padding-left:14px" ></select>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+<!-- Circle are black when hovered-->
+<style>
+.myCircle:hover {
+  stroke: black;
+}
+</style>
+
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 40, right: 40, bottom: 70, left: 250},
+    width = 860 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+
+//Read the data
+d3.csv("https://raw.githubusercontent.com/arushig6/test/master/Unemp20112020.csv", function(data) {
+
+    // List of groups (here I have one group per column)
+    var allGroup = ["All", "Male", "Female"]
+
+    // add the options to the button
+    d3.select("#selectButton")
+      .selectAll('myOptions')
+     	.data(allGroup)
+      .enter()
+    	.append('option')
+      .text(function (d) { return d; }) // text showed in the menu
+      .attr("value", function (d) { return d; })
+       // corresponding value returned by the button
+
+
+    // Add X axis --> it is a date format
+    var x = d3.scaleTime()
+      .domain([2011,2020])
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+
+      // text label for the x axis
+    svg.append("text")
+       .attr("transform",
+            "translate(" + (width/2) + " ," +
+                              (height + margin.top + 20) + ")")
+       .style("text-anchor", "middle")
+       .text("Year");
+
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain( [0,20])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+    svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "13em")
+      .style("text-anchor", "middle")
+      .text("Unemployment Rate");
+
+    // Initialize line with group a
+    var line = svg
+      .append('g')
+      .append("path")
+        .datum(data)
+        .attr("d", d3.line()
+          .x(function(d) { return x(+d.time) })
+          .y(function(d) { return y(+d.All) })
+        )
+        .attr("stroke", "black")
+        .style("stroke-width", 2)
+        .style("fill", "none")
+
+    // Initialize dots with group a
+    var dot = svg
+      .selectAll('circle')
+      .data(data)
+      .enter()
+      .append('circle')
+        .attr("cx", function(d) { return x(+d.time) })
+        .attr("cy", function(d) { return y(+d.All) })
+        .attr("r", 6)
+        .style("fill", "blue")
+
+     svg.append("line")
+        .attr("x1", 500)
+        .attr("x2", 570)
+        .attr("y1", 100)
+        .attr("y2", 220)
+        .attr("stroke-width","0.5px")
+        .attr("stroke" , "black")
+
+      svg.append("text")
+        .attr("x", 430)
+        .attr("y", 90)
+        .style("font-size", "13px")
+        .text("The COVID-19 Recession")
+
+
+
+
+
+    // A function that update the chart
+    function update(selectedGroup) {
+
+      // Create new data with the selection?
+      var dataFilter = data.map(function(d){return {time: d.time, value:d[selectedGroup]} })
+
+      // Give these new data to update line
+      line
+          .datum(dataFilter)
+          .transition()
+          .duration(1000)
+          .attr("d", d3.line()
+            .x(function(d) { return x(+d.time) })
+            .y(function(d) { return y(+d.value) })
+          )
+
+
+      dot
+        .data(dataFilter)
+        .transition()
+        .duration(1000)
+          .attr("cx", function(d) { return x(+d.time) })
+          .attr("cy", function(d) { return y(+d.value) })
+
+    }
+
+    // When the button is changed, run the updateChart function
+    d3.select("#selectButton").on("change", function(d) {
+        // recover the option that has been chosen
+        var selectedOption = d3.select(this).property("value")
+        // run the updateChart function with this selected option
+        update(selectedOption)
+    })
+
+})
+
+</script>
