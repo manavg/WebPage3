@@ -12,49 +12,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.topnav a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.pagination {
-  display: inline-block;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
-  
 .grid line {
   stroke: lightgrey;
   stroke-opacity: 0.7;
@@ -65,45 +22,33 @@ body {
   stroke-width: 0;
 }
 
+.serif {
+  font-family: "Times New Roman", Times, serif;
+}
+
 </style>
 </head>
 <body>
-
-
-<div class="topnav">
-  <a href="#home">Home</a>
-  <a class="active" href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
-</div>
-
-<div style="padding-left:20px">
-  <h2>Unemployment rate of men and women in the United States from 1990-2020</h2>
-  <p style="font-family:verdana">The current COVID-19 pandemic situation has had an unprecedented impact on the US economy
+<div style="padding-left:10px">
+  <h2 class="serif" style= "font-size:30px"><u>US Unemployment rate from 1990 to 2020</u></h2>
+  <p class="serif" style= "font-size:20px">The current COVID-19 pandemic situation has had an unprecedented impact on the US economy
   with millions of people claiming unemployment and this event is been considered as one of the worst hit on the US economy.
   In the last 30 years, every 10 year there has been an event which has contributed to increase in unemployment and through
-  the charts below you can know more about those events and compare the unemployment rates with the current times. </p> <br></br>
+  the charts below you can know more about those events and compare the unemployment rates(Male or Female) with the current times.</p>
+  <br>
 </div>
 
-
-<div class="pagination">
-  <a href="">&laquo;</a>
-  <a href="https://arushig6.github.io/test1/">1</a>
-  <a href="https://gargarushi.github.io/WebPage2/">2</a>
-  <a href="https://manavg.github.io/WebPage3/" class="active">3</a>
-  <a href="#">&raquo;</a>
-</div>
-
-</body>
+<p class="serif" style= "padding-left:10px;font-size:15px"> <<<a href="https://gargarushi.github.io/WebPage2/">Previuos</a>  <a href="https://arushig6.github.io/test1/">Start Over</a>>></p>
 </html>
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 
-<label style = "padding-left:100px"></label>
-<label for="selectButton">Select dropdown to change for Male or Female:</label>
+<label class = "serif" style = "padding-left:400px"></label>
+
+<label for="selectButton" class = "serif">Dropdown to change for Male or Female:</label>
 <!-- Initialize a select button -->
-<select id="selectButton"  style="padding-left:14px" ></select>
+<select id="selectButton"  style="padding-left:20px" ></select>
 
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
