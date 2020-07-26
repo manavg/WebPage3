@@ -54,6 +54,16 @@ body {
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+  
+.grid line {
+  stroke: lightgrey;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+}
 
 </style>
 </head>
@@ -69,8 +79,10 @@ body {
 
 <div style="padding-left:20px">
   <h2>Unemployment rate of men and women in the United States from 1990-2020</h2>
-  <p style="font-family:verdana">The chart below provides a glimpse of how has the unemployment rate changed for men and women combined and individually from 2010 to 2020, highligting
-     the year 2020 which saw the highest unemployment rate of 8% with Male unemployment rate being 8% and Female 9% </p> <br></br>
+  <p style="font-family:verdana">The current COVID-19 pandemic situation has had an unprecedented impact on the US economy
+  with millions of people claiming unemployment and this event is been considered as one of the worst hit on the US economy.
+  In the last 30 years, every 10 year there has been an event which has contributed to increase in unemployment and through
+  the charts below you can know more about those events and compare the unemployment rates with the current times. </p> <br></br>
 </div>
 
 
@@ -159,6 +171,35 @@ d3.csv("https://raw.githubusercontent.com/arushig6/test/master/Unemp20112020.csv
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(y));
+  
+    // gridlines in x axis function
+      function make_x_gridlines() {
+          return d3.axisBottom(x)
+              .ticks(10)
+      }
+
+      // gridlines in y axis function
+      function make_y_gridlines() {
+          return d3.axisLeft(y)
+                .ticks(10)
+      }
+
+      // add the X gridlines
+      svg.append("g")
+          .attr("class", "grid")
+          .attr("transform", "translate(0," + height + ")")
+          .call(make_x_gridlines()
+              .tickSize(-height)
+              .tickFormat("")
+          )
+
+      // add the Y gridlines
+      svg.append("g")
+          .attr("class", "grid")
+          .call(make_y_gridlines()
+              .tickSize(-width)
+              .tickFormat("")
+          )
 
     svg.append("text")
       .attr("transform", "rotate(-90)")
