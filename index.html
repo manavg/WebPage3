@@ -31,10 +31,10 @@ body {
 <body>
 <div style="padding-left:10px">
   <h2 class="serif" style= "font-size:30px"><u>US Unemployment rate from 1990 to 2020</u></h2>
-  <p class="serif" style= "font-size:20px">The current COVID-19 pandemic situation has had an unprecedented impact on the US economy
-  with millions of people claiming unemployment and this event is been considered as one of the worst hit on the US economy.
-  In the last 30 years, every 10 year there has been an event which has contributed to increase in unemployment and through
-  the charts below you can know more about those events and compare the unemployment rates(Male or Female) with the current times.</p>
+<p class="serif" style= "font-size:20px">The current COVID-19 pandemic situation has had an unprecedented impact on the US economy
+  with millions of people claiming <br>unemployment and this event is been considered as one of the worst hit on the US economy.
+  In the last 30 years, every 10 year<br> there has been an event which has contributed to increase in unemployment and through
+  the slide show below you can know more about <br>those events and compare the unemployment rates(Male or Female) across time periods.</p>
   <br>
 </div>
 
@@ -151,7 +151,7 @@ d3.csv("https://raw.githubusercontent.com/arushig6/test/master/Unemp20112020.csv
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)
       .attr("x",0 - (height / 2))
-      .attr("dy", "15.5em")
+      .attr("dy", "13em")
       .attr("stroke", "#00008B")
       .style("text-anchor", "middle")
       .text("Unemployment Rate");
