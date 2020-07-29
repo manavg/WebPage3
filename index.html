@@ -107,6 +107,7 @@ d3.csv("https://raw.githubusercontent.com/arushig6/test/master/Unemp20112020.csv
        .attr("transform",
             "translate(" + (width/2) + " ," +
                               (height + margin.top + 20) + ")")
+       .attr("stroke", "#00008B")
        .style("text-anchor", "middle")
        .text("Year");
 
@@ -150,7 +151,8 @@ d3.csv("https://raw.githubusercontent.com/arushig6/test/master/Unemp20112020.csv
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)
       .attr("x",0 - (height / 2))
-      .attr("dy", "13em")
+      .attr("dy", "15.5em")
+      .attr("stroke", "#00008B")
       .style("text-anchor", "middle")
       .text("Unemployment Rate");
 
@@ -163,7 +165,7 @@ d3.csv("https://raw.githubusercontent.com/arushig6/test/master/Unemp20112020.csv
           .x(function(d) { return x(+d.time) })
           .y(function(d) { return y(+d.All) })
         )
-        .attr("stroke", "black")
+        .attr("stroke", "purple")
         .style("stroke-width", 2)
         .style("fill", "none")
 
@@ -176,20 +178,23 @@ d3.csv("https://raw.githubusercontent.com/arushig6/test/master/Unemp20112020.csv
         .attr("cx", function(d) { return x(+d.time) })
         .attr("cy", function(d) { return y(+d.All) })
         .attr("r", 6)
-        .style("fill", "blue")
+        .style("fill", "purple")
 
      svg.append("line")
         .attr("x1", 500)
         .attr("x2", 570)
         .attr("y1", 100)
         .attr("y2", 220)
-        .attr("stroke-width","0.5px")
-        .attr("stroke" , "black")
+        .attr("stroke-width","0.9px")
+        .attr("stroke" , "#E8336D")
 
       svg.append("text")
         .attr("x", 410)
         .attr("y", 90)
+        .attr("fill", "#E8336D")
         .style("font-size", "13px")
+        .style("font-family", "Lato")
+        .style("font-weight", "900")
         .text("The COVID-19 Recession")
 
 
